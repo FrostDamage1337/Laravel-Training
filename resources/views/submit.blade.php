@@ -35,6 +35,27 @@
                 </div>
                 <button type="submit" class="btn btn-primary">Submit</button>
             </form>
+            
         </div>
+        <div class="row link-list">
+            <h2>Links list</h2>
+                @foreach ($links as $link)
+                <div class="form-group">
+                    <form action="/submit/delete" method="post">
+                    @csrf
+                        <input type="hidden" name="id" value="{{ $link->id }}">
+                        <span>{{ $link->title }}</span>
+                        <input type="submit" value="Delete">
+                    </form>
+                </div>
+                @endforeach
+        </div>
+        <style>
+            .link-list {
+                display: flex;
+                margin-top: 50px;
+                flex-direction: column;
+            }
+        </style>
     </div>
 @endsection

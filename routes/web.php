@@ -27,7 +27,10 @@ Route::get('/egor', function() {
 });
 
 Route::get('/submit', function() {
-    return view('submit');
+    $links = \App\Link::all();
+
+
+    return view('submit', ['links' => $links ]);
 });
 
 Route::post('/submit', function(Request $request) {
@@ -40,6 +43,13 @@ Route::post('/submit', function(Request $request) {
     $link = tap(new App\Link($data))->save();
 
     return redirect('/');
+});
+
+Route::post('/submit/delete', function(Request $request) {
+    $link = App\Link::find($request->id);
+    $link->delete();
+
+    return redirect('/submit');
 });
 
 Auth::routes();

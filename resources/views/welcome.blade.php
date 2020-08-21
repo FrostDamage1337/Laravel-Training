@@ -89,6 +89,12 @@
                     <a href="{{ $link->url }}">{{ $link->title }}</a>
                 @endforeach
                 </div>
+                @if (Route::has('login'))
+                @auth
+                <h4><a href="{{ url('/submit') }}">Manage links</a></h4>
+                @endauth
+
+                @endif
             </div>
         </div>
     </body>
