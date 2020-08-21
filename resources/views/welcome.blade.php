@@ -95,6 +95,16 @@
                 @endauth
 
                 @endif
+                <br>
+
+                <form action="/" method="POST">
+                @csrf
+                    <input type="text" name="url" placeholder="url">
+                    <input type="submit" value="Search">
+                </form>
+                @if (isset($content))
+                    @include('parser', [ 'content' => $content ]);
+                @endif
             </div>
         </div>
     </body>

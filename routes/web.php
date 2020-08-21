@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use Illuminate\Http\Request;
+use App\Http\Controllers\HTMLParser;
 
 /*
 |--------------------------------------------------------------------------
@@ -43,6 +44,14 @@ Route::post('/submit', function(Request $request) {
     $link = tap(new App\Link($data))->save();
 
     return redirect('/');
+});
+
+Route::post('/', function(Request $request) {
+    $url = $request->url;
+    $content = HTMLParser::parse($url);
+    $links = \App\Link::all();
+    
+    return view('welcome', [ 'links' => $links, 'content' => $content ]);
 });
 
 Route::post('/submit/delete', function(Request $request) {
